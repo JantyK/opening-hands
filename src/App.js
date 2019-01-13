@@ -1,28 +1,33 @@
 import React, { Component } from 'react';
-import logo from './logo.png';
-import './App.css';
+import { BrowserRouter } from 'react-router-dom';
+import { createMuiTheme, MuiThemeProvider, withTheme } from '@material-ui/core/styles';
+
+import MainContainer from './containers/MainContainer';
+
+const muiTheme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#FFFFFF',
+    },
+    secondary: {
+      main: '#282C33',
+    },
+  },
+  typography: {
+    useNextVariants: true,
+  },
+});
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Opening Hand is a probability calculator for your favorite card games
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Let's Get Started
-          </a>
-        </header>
-      </div>
+      <BrowserRouter>
+        <MuiThemeProvider theme={muiTheme}>
+          <MainContainer />
+        </MuiThemeProvider>
+      </BrowserRouter>
     );
   }
 }
 
-export default App;
+export default withTheme()(App);
