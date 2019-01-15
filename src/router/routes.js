@@ -1,15 +1,19 @@
 import React from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import PublicRoute from './publicRoute';
-import HomeContainer from '../containers/HomeContainer';
+import WelcomeContainer from '../containers/WelcomeContainer';
+import DeckListContainer from '../containers/DeckListContainer';
 
 const routes = (
   <Switch>
     <Route exact path='/' render={() => (
-      <Redirect to="/home" />
+      <Redirect to="/welcome" />
     )}/>
 
-    <PublicRoute path='/home' component={HomeContainer} />
+    <PublicRoute path='/welcome' component={WelcomeContainer} />
+    <PublicRoute path='/home' component={WelcomeContainer} />
+    <PublicRoute path='/decks' component={DeckListContainer} />
+    <PublicRoute path='/simulate' component={WelcomeContainer} />
 
     <Route path='/*' component={() => (<Redirect to='/'/>) } />
   </Switch>

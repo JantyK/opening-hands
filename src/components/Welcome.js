@@ -19,6 +19,7 @@ const styles = () => ({
   },
   logo: {
     height: '25vh',
+    marginTop: 32,
   },
   button: {
     marginTop: 16,
@@ -30,16 +31,19 @@ const styles = () => ({
   }
 });
 
-class Home extends Component {
+class Welcome extends Component {
   render() {
     const { classes } = this.props;
     return (
       <div className={classes.mainContent}>
-        <img src={logo} className={classes.logo} alt="logo" />
-        <Typography color="primary" variant="h6" className={classes.text}>
-          Opening Hand is a probability calculator for your favorite card games.
+        <Typography color="primary" variant="h3" className={classes.text}>
+          Opening Hand
         </Typography>
-        <Button variant="contained" color="primary" className={classes.button}>
+        <img src={logo} className={classes.logo} alt="logo" />
+        <Typography color="primary" variant="h5" className={classes.text}>
+          A probability calculator for your favorite card games.
+        </Typography>
+        <Button variant="contained" color="primary" className={classes.button} onClick={this.props.onGetStartedClicked}>
           Let's Get Started
         </Button>
       </div>
@@ -47,4 +51,4 @@ class Home extends Component {
   }
 }
 
-export default withStyles(styles)(Home);
+export default withStyles(styles)(Welcome);
