@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+
 import { withStyles } from '@material-ui/core/styles';
 
 import { Button, Typography } from '@material-ui/core';
-
 
 import logo from '../images/logo.png';
 
@@ -13,8 +13,6 @@ const styles = () => ({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: 'calc(10px + 2vh)',
-    color: 'white',
     textAlign: 'center',
   },
   logo: {
@@ -34,16 +32,17 @@ const styles = () => ({
 class Welcome extends Component {
   render() {
     const { classes } = this.props;
+
     return (
       <div className={classes.mainContent}>
-        <Typography color="primary" variant="h3" className={classes.text}>
+        <Typography color='primary' variant='h3' className={classes.text}>
           Opening Hand
         </Typography>
-        <img src={logo} className={classes.logo} alt="logo" />
-        <Typography color="primary" variant="h5" className={classes.text}>
-          A probability calculator for your favorite card games.
+        <img src={logo} className={classes.logo} alt='logo' />
+        <Typography color='primary' variant='h5' className={classes.text}>
+          A probability calculator for your favorite card games
         </Typography>
-        <Button variant="contained" color="primary" className={classes.button} onClick={this.props.onGetStartedClicked}>
+        <Button variant='contained' color='primary' className={classes.button} onClick={this.props.onGetStartedClicked}>
           Let's Get Started
         </Button>
       </div>

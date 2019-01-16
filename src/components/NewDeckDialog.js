@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  TextField,
+} from '@material-ui/core';
 
 class NewDeckDialog extends Component {
 
   state = {
-    gameName: 'YuGiOh',
-    deckName: 'Yang Zing OTK',
+    gameName: '',
+    deckName: '',
   }
 
   onChangeTextField = name => event => {
@@ -21,7 +23,7 @@ class NewDeckDialog extends Component {
 
   onCreateDeckClicked = () => {
     const { gameName, deckName } = this.state;
-    const deck = { gameName, deckName };
+    const deck = { gameName, deckName, cards: [] };
     this.props.onCreateDeckClicked(deck);
     this.setState({ gameName: '', deckName: '' });
     this.props.closeNewDeckDialog();
@@ -37,35 +39,41 @@ class NewDeckDialog extends Component {
       <Dialog
         open={open}
         onClose={closeNewDeckDialog}
-        aria-labelledby="form-dialog-title"
+        aria-labelledby='form-dialog-title'
       >
-        <DialogTitle id="form-dialog-title">New Deck</DialogTitle>
+        <DialogTitle id='form-dialog-title'>New Deck</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Please fill out the information below to create your new deck :)
           </DialogContentText>
           <TextField
             autoFocus
-            margin="dense"
-            id="game"
-            label="Game"
-            type="text"
+            margin='dense'
+            id='game'
+            label='Game'
+            type='text'
             fullWidth
-            placeholder="What's the name of the game your deck belongs to?"
+            placeholder='What card game?'
             required
             value={gameName}
             onChange={this.onChangeTextField('gameName')}
+            inputProps={{
+              autoComplete: 'off',
+            }}
           />
           <TextField
-            margin="dense"
-            id="name"
-            label="Name"
-            type="text"
+            margin='dense'
+            id='name'
+            label='Name'
+            type='text'
             fullWidth
-            placeholder="Name your deck!"
+            placeholder='Name your deck!'
             required
             value={deckName}
             onChange={this.onChangeTextField('deckName')}
+            inputProps={{
+              autoComplete: 'off',
+            }}
           />
         </DialogContent>
         <DialogActions>

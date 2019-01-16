@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { withStyles } from '@material-ui/core/styles';
 
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
+import {
+  Grid,
+  Typography,
+  Divider,
+} from '@material-ui/core';
 
 const styles = () => ({
   text: {
@@ -19,23 +22,24 @@ class EmptyView extends React.Component {
     if (this.props.hideDivider) {
       return null;
     }
-    return <Divider light="true" style={{ marginTop: 16, marginBottom: 16 }} />;
+    return <Divider light='true' style={{ marginTop: 16, marginBottom: 16 }} />;
   }
 
   render() {
     const { classes } = this.props;
+
     return (
-      <Grid container column="true" justify="center" alignItems="center">
-        <Grid item xs={8} style={{ textAlign: 'center' }}>
+      <Grid container column='true' justify='center' alignItems='center'>
+        <Grid item xs={8} md={6} style={{ textAlign: 'center' }}>
           {this.props.icon}
-          <Typography color="primary" variant="h5" className={classes.text}>
+          <Typography color='primary' variant='h5' className={classes.text}>
             {this.props.topMessage}
           </Typography>
           {this.hideDivider()}
-          <Typography color="primary" variant="h5" className={classes.text}>
+          <Typography color='primary' variant='h5' className={classes.text}>
             {this.props.bottomMessage}
           </Typography>
-          {this.props.button}
+          {this.props.component}
         </Grid>
       </Grid>
     );
@@ -46,7 +50,7 @@ EmptyView.propTypes = {
   icon: PropTypes.element,
   topMessage: PropTypes.string,
   bottomMessage: PropTypes.string,
-  button: PropTypes.element,
+  component: PropTypes.component,
   hideDivider: PropTypes.bool,
 };
 

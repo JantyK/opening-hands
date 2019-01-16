@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { withStyles } from '@material-ui/core/styles';
+
 import { Button } from '@material-ui/core';
 
 import EmptyView from '../components/EmptyView';
@@ -13,11 +14,7 @@ const styles = () => ({
   mainContent: {
     minHeight: '100vh',
     display: 'flex',
-    flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: 'calc(10px + 2vh)',
-    color: 'white',
   },
   emptyBoxIcon: {
     height: '25vh',
@@ -47,7 +44,6 @@ class DeckListContainer extends Component {
     this.setState({ showNewDeckDialog: false });
   };
 
-
   onNewDeckClicked = () => {
     this.openNewDeckDialog();
   }
@@ -68,8 +64,10 @@ class DeckListContainer extends Component {
     // Edit deck name and game
   }
 
-  onViewDeckClicked = () => {
-    // View deck details and add cards
+  onViewDeckClicked = (deckIndex) => {
+    const deckList = this.state.deckList;
+    const deck = deckList[deckIndex];
+    this.props.history.push({pathname: '/deck-details', state: { deck }})
   }
 
   renderEmptyView = () => {
@@ -78,14 +76,14 @@ class DeckListContainer extends Component {
 
     return (
       <EmptyView
-        icon={<img src={emptyBox} className={classes.emptyBoxIcon} alt="emptyBox" />}
+        icon={<img src={emptyBox} className={classes.emptyBoxIcon} alt='emptyBox' />}
         topMessage={emptyViewTopMessage}
         bottomMessage={null}
         hideDivider
-        button={
+        component={
           <Button
-            variant="contained"
-            color="primary"
+            variant='contained'
+            color='primary'
             className={classes.button}
             onClick={this.onNewDeckClicked}
           >
@@ -116,7 +114,7 @@ class DeckListContainer extends Component {
             onEditDeckClicked={this.onEditDeckClicked}
             onViewDeckClicked={this.onViewDeckClicked}
           />
-          :
+        :
           this.renderEmptyView()
         }
       </div>

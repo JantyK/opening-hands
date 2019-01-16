@@ -1,31 +1,27 @@
 import React, { Component } from 'react';
 
 import { withStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
-import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEye';
-
 
 import {
-  Button,
   Card,
   CardActions,
   CardActionArea,
   CardContent,
   Grid,
   Typography,
+  IconButton,
 } from '@material-ui/core'
+
+import {
+  AddCircle,
+  Delete,
+  Edit,
+  RemoveRedEye,
+} from '@material-ui/icons';
 
 const styles = () => ({
   mainContent: {
-    minHeight: '100vh',
     width: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'white',
     overflow: 'auto',
   },
   card: {
@@ -70,13 +66,14 @@ const styles = () => ({
 
 function AddNewDeckButton(props) {
   const { classes, onNewDeckClicked } = props;
+
   return (
-    <Grid container justify="center" item xs>
+    <Grid container justify='center' item xs>
       <Card className={classes.addDeckCard}>
         <CardActionArea className={classes.cardActionArea} onClick={onNewDeckClicked}>
           <CardContent>
-            <AddCircleIcon className={classes.addDeckCardIcon}/>
-            <Typography className={classes.addDeckCardTitle} color="textSecondary" gutterBottom>
+            <AddCircle color="primary" className={classes.addDeckCardIcon}/>
+            <Typography className={classes.addDeckCardTitle} color='textSecondary' gutterBottom>
               New Deck
             </Typography>
           </CardContent>
@@ -89,29 +86,29 @@ function AddNewDeckButton(props) {
 function Deck(props) {
   const { classes, deck, onDeleteDeckClicked, onEditDeckClicked, onViewDeckClicked } = props;
   const { gameName, deckName } = deck;
+
   return (
-    <Grid container justify="center" item xs>
+    <Grid container justify='center' item xs>
       <Card className={classes.card}>
         <CardContent className={classes.cardContent}>
-          <CardActionArea className={classes.cardActionArea} onClick={() => {console.log('hi')}}>
-
-            <Typography variant="h5">
+          <CardActionArea className={classes.cardActionArea} onClick={onViewDeckClicked}>
+            <Typography variant='h5'>
               {`${gameName} Deck`}
             </Typography>
-            <Typography variant="h5">
+            <Typography variant='h5'>
               {deckName}
             </Typography>
           </CardActionArea>
         </CardContent>
         <CardActions className={classes.cardActions}>
           <IconButton onClick={onDeleteDeckClicked}>
-            <DeleteIcon />
+            <Delete />
           </IconButton>
           <IconButton onClick={onEditDeckClicked}>
-            <EditIcon />
+            <Edit />
           </IconButton>
           <IconButton onClick={onViewDeckClicked}>
-            <RemoveRedEyeIcon />
+            <RemoveRedEye />
           </IconButton>
         </CardActions>
       </Card>
@@ -121,18 +118,20 @@ function Deck(props) {
 
 class DeckList extends Component {
   render() {
-    const { classes, deckList, onNewDeckClicked, onDeleteDeckClicked } = this.props;
+    const { classes, deckList, onNewDeckClicked, onDeleteDeckClicked, onViewDeckClicked } = this.props;
 
     return (
       <div className={classes.mainContent}>
-        <Grid container justify="space-around" alignItems="center">
+        <Grid container justify='space-around' alignItems='center'>
           <AddNewDeckButton classes={classes} onNewDeckClicked={onNewDeckClicked}/>
           { deckList.map((deck, index) => (
             <Deck
               key={index}
               deck={deck}
               classes={classes}
-              onDeleteDeckClicked={() => onDeleteDeckClicked(index)}/>
+              onDeleteDeckClicked={() => onDeleteDeckClicked(index)}
+              onViewDeckClicked={() => onViewDeckClicked(index)}
+            />
             ))
           }
         </Grid>
