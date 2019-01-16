@@ -8,7 +8,7 @@ import {
   TextField
 } from '@material-ui/core';
 
-const styles = (theme) => ({
+const styles = () => ({
   input: {
     color: 'white',
   },

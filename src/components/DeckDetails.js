@@ -18,7 +18,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 import NewCardInput from './NewCardInput';
 
-const styles = (theme) => ({
+const styles = () => ({
   mainContent: {
     minHeight: '100vh',
   },
