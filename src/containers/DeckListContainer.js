@@ -12,7 +12,7 @@ import emptyBox from '../images/emptyBox.png';
 
 const styles = () => ({
   mainContent: {
-    minHeight: '100vh',
+    minHeight: 'calc(100vh - 48px)',
     display: 'flex',
     alignItems: 'center',
   },
@@ -34,6 +34,17 @@ class DeckListContainer extends Component {
   state = {
     showNewDeckDialog: false,
     deckList: [],
+  }
+
+  componentDidMount = () => {
+    const deckList = JSON.parse(localStorage.getItem('deckList'))
+    if(deckList) this.setState({ deckList })
+    onbeforeunload = () => this.onSaveDeckInLocalStorage();
+  }
+
+  componentWillUnmount = () => {
+    this.onSaveDeckInLocalStorage();
+    onbeforeunload = null;
   }
 
   openNewDeckDialog = () => {
@@ -65,9 +76,11 @@ class DeckListContainer extends Component {
   }
 
   onViewDeckClicked = (deckIndex) => {
-    const deckList = this.state.deckList;
-    const deck = deckList[deckIndex];
-    this.props.history.push({pathname: '/deck-details', state: { deck }})
+    this.props.history.push({pathname: '/deck-details', state: { deckIndex }})
+  }
+
+  onSaveDeckInLocalStorage = () => {
+    localStorage.setItem('deckList', JSON.stringify(this.state.deckList));
   }
 
   renderEmptyView = () => {
@@ -96,7 +109,7 @@ class DeckListContainer extends Component {
 
   render() {
     const { classes } = this.props;
-    const shouldShowDeckList = this.state.deckList.length > 0;
+    const shouldShowDeckList = this.state.deckList && this.state.deckList.length > 0;
 
     return (
       <div className={classes.mainContent}>

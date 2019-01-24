@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 
 import { withStyles } from '@material-ui/core/styles';
 
-import { Button, Typography } from '@material-ui/core';
-
-import logo from '../images/logo.png';
+import { Typography } from '@material-ui/core';
 
 const styles = () => ({
   mainContent: {
@@ -36,15 +34,8 @@ class Welcome extends Component {
     return (
       <div className={classes.mainContent}>
         <Typography color='primary' variant='h3' className={classes.text}>
-          Opening Hands
+          Simulation stuff goes here.
         </Typography>
-        <img src={logo} className={classes.logo} alt='logo' />
-        <Typography color='primary' variant='h5' className={classes.text}>
-          A probability calculator for your favorite card games
-        </Typography>
-        <Button variant='contained' color='primary' className={classes.button} onClick={this.props.onGetStartedClicked}>
-          Let's Get Started
-        </Button>
       </div>
     );
   }

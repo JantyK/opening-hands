@@ -23,7 +23,7 @@ class NewDeckDialog extends Component {
 
   onCreateDeckClicked = () => {
     const { gameName, deckName } = this.state;
-    const deck = { gameName, deckName, cards: [] };
+    const deck = { gameName, deckName, cards: [], idealOpeningHands: [] };
     this.props.onCreateDeckClicked(deck);
     this.setState({ gameName: '', deckName: '' });
     this.props.closeNewDeckDialog();
